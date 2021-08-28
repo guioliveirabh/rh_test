@@ -27,7 +27,11 @@ Prerequisites:
 
 Command: `$ make test`
 
-It will build the image using `podman`, create a container and run the tests on it.
+It will build the image using `podman`, create a container and run the tests on it. The test suite consists of:
+
+* Few unit tests for the model and API;
+    * A coverage report is provided after the execution.
+* Linting errors on code using `pylint`.
 
 ### Run server
 
