@@ -29,6 +29,9 @@ class TestAPI(unittest.TestCase):
             response = client.get(URL_PREFIX + '/colors/%23000')
             self.assertEqual(response.get_json(), self.black_color)
             self.assertEqual(response.status_code, html_codes.OK)
+            response = client.get(URL_PREFIX + '/colors/black')
+            self.assertEqual(response.get_json(), self.black_color)
+            self.assertEqual(response.status_code, html_codes.OK)
 
     def test_conflict(self):
         self.color_manager.delete_all()

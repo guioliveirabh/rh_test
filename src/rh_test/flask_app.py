@@ -49,8 +49,10 @@ class ColorResource(Resource):
     def get(self, value):  # pylint: disable=R1710
         """Single color retrieval"""
         try:
-            value = ColorManager.convert_hex_color(value)
-            return self.color_manager.get_color_by_value(value)
+            if value.startswith('#'):
+                value = ColorManager.convert_hex_color(value)
+                return self.color_manager.get_color_by_value(value)
+            return self.color_manager.get_color_by_name(value)
         except (ValueError, ColorDoesNotExistException) as exception:
             abort_with_message(html_codes.NOT_FOUND, str(exception))
 

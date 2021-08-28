@@ -26,16 +26,25 @@ class TestColorModel(unittest.TestCase):
         self.color_manager.delete_all()
         self.assertEqual(len(self.color_manager.get_all_colors()), 0)
 
-    def test_insert_and_get(self):
+    def test_insert_and_get_by_value(self):
         self.color_manager.delete_all()
         self.color_manager.insert_color(**self.black_color)
         self.assertEqual(len(self.color_manager.get_all_colors()), 1)
         self.assertEqual(self.color_manager.get_color_by_value(self.black_color['value']), self.black_color)
 
+    def test_insert_and_get_by_name(self):
+        self.color_manager.delete_all()
+        self.color_manager.insert_color(**self.black_color)
+        self.assertEqual(len(self.color_manager.get_all_colors()), 1)
+        self.assertEqual(self.color_manager.get_color_by_name(self.black_color['color']), self.black_color)
+
     def test_get_non_existent(self):
         self.color_manager.delete_all()
         with self.assertRaises(ColorDoesNotExistException):
             self.color_manager.get_color_by_value(self.black_color['value'])
+
+        with self.assertRaises(ColorDoesNotExistException):
+            self.color_manager.get_color_by_name(self.black_color['color'])
 
 
 if __name__ == '__main__':

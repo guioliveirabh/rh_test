@@ -61,3 +61,4 @@ It will build the image using `podman`, create a container and run the webserver
 | GET | /colors | - | returns a list with all the colors in database. |
 | POST | /colors | color, value | inserts the color on database, if not present, returning it. Otherwise the response code will be set to `409`. |
 | GET | /colors/\<RGB hex> | - | returns the color, if present on database. Otherwise the response code will be set to `404`. |
+| GET | /colors/\<color name> | - | returns the color, if present on database. Otherwise the response code will be set to `404`. |

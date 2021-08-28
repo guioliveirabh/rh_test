@@ -47,6 +47,14 @@ class ColorManager(metaclass=Singleton):
         except KeyError as exception:
             raise ColorDoesNotExistException(f"Color '{value}' does not exist") from exception
 
+    def get_color_by_name(self, color_name: ColorName) -> Color:
+        """Return a color from database using its name as key"""
+        for color in self._color_db.values():
+            if color['color'] == color_name:
+                return color
+
+        raise ColorDoesNotExistException(f"Color '{color_name}' does not exist")
+
     def insert_color(self, color: ColorName, value: RGBHexValue) -> Color:
         """Create a color and inserts it on database"""
         if value in self._color_db:
