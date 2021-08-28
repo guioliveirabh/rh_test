@@ -1,13 +1,15 @@
+image_name = rh_test
+
 .PHONY: build run regression test
 
 build:
-	podman build -t rh_test --ignorefile .containerignore .
+	podman build -t $(image_name) --ignorefile .containerignore .
 
 run: build
-	podman run --rm -p 5000:5000 rh_test
+	podman run --rm -p 5000:5000 $(image_name)
 
 test: build
-	podman run --rm -i --entrypoint make rh_test regression
+	podman run --rm -i --entrypoint make $(image_name) regression
 
 # run inside container
 regression:
