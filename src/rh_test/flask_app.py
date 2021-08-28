@@ -6,8 +6,6 @@ from flask_restful import Api, Resource, abort, fields, marshal_with, reqparse
 from rh_test.models.color import ColorAlreadyExistsException, ColorDoesNotExistException, ColorManager
 from rh_test.util import html_codes
 
-app = Flask(__name__)
-api = Api(app)
 post_parser = reqparse.RequestParser()
 post_parser.add_argument('color', required=True)
 post_parser.add_argument('value', required=True, type=ColorManager.convert_hex_color)
@@ -55,6 +53,12 @@ class ColorResource(Resource):
             abort_with_message(html_codes.NOT_FOUND, str(exception))
 
 
-# set routes
-api.add_resource(ColorListResource, '/colors')
-api.add_resource(ColorResource, '/colors/<value>')
+def create_app():
+    """Create flask app and set routes"""
+    app = Flask(__name__)
+    api = Api(app)
+
+    # set routes
+    api.add_resource(ColorListResource, '/colors')
+    api.add_resource(ColorResource, '/colors/<value>')
+    return app
