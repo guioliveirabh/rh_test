@@ -22,6 +22,9 @@ setup(
     python_requires='>=3.6, <4',
     zip_safe=False,
     install_requires=['flask==2.0.1', 'flask_restful==0.3.9'],
+    extras_require={
+        'test': ['coverage==5.5', 'pylint==2.10.2'],
+    },
     package_data={
         'rh_test': ['resources/colors.json'],
     },
